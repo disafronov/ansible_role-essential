@@ -1,0 +1,4 @@
+# Requirements for ansible latest
+ansible
+ansible-lint
+yamllint

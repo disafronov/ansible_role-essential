@@ -21,6 +21,7 @@
             force: true
 
         - name: Template a file to /etc/apt/sources.list.d/backports.list for Ubuntu {{ ansible_distribution_release }}
+          when: apply_backports is defined and apply_backports
           ansible.builtin.copy:
             content: |
               deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports main restricted universe multiverse
@@ -29,7 +30,6 @@
             group: root
             mode: "0644"
             force: true
-          when: apply_backports is defined and apply_backports
 
     - name: Configure repositories for Debian
       when: ansible_distribution == 'Debian'
@@ -48,6 +48,7 @@
             force: true
 
         - name: Template a file to /etc/apt/sources.list.d/non-free.list for Debian {{ ansible_distribution_release }}
+          when: apply_non_free is defined and apply_non_free
           ansible.builtin.copy:
             content: |
               deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }} non-free non-free-firmware
@@ -58,9 +59,9 @@
             group: root
             mode: "0644"
             force: true
-          when: apply_non_free is defined and apply_non_free
 
         - name: Template a file to /etc/apt/sources.list.d/backports.list for Debian {{ ansible_distribution_release }}
+          when: apply_backports is defined and apply_backports
           ansible.builtin.copy:
             content: |
               deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib
@@ -69,9 +70,9 @@
             group: root
             mode: "0644"
             force: true
-          when: apply_backports is defined and apply_backports
 
         - name: Template a file to /etc/apt/sources.list.d/backports_non-free.list for Debian {{ ansible_distribution_release }}
+          when: apply_backports is defined and apply_backports and apply_non_free is defined and apply_non_free
           ansible.builtin.copy:
             content: |
               deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }}-backports non-free non-free-firmware
@@ -80,7 +81,6 @@
             group: root
             mode: "0644"
             force: true
-          when: apply_backports is defined and apply_backports and apply_non_free is defined and apply_non_free
 
     # APT: ansible requirements
     - name: Install [apt] Ansible module requirements using apt-get

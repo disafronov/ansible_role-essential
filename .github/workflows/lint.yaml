@@ -39,8 +39,5 @@ jobs:
       - name: Install test dependencies
         run: pip install -r .requirements/${{ matrix.ansible }}.txt
 
-      # - name: Run yamllint
-      #   run: yamllint .
-
       - name: Run ansible-lint
         run: ansible-lint

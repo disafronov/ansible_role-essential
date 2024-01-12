@@ -125,7 +125,7 @@
             force: true
 
         - name: Template a file to /etc/apt/sources.list.d/backports.list for Debian {{ ansible_distribution_release }}
-          when: 
+          when:
             - apt_repository_backports is defined
             - apt_repository_backports
           ansible.builtin.copy:

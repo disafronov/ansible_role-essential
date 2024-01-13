@@ -1,9 +1,9 @@
+collections: []
+dependencies: []
 galaxy_info:
   author: Dmitriy Safronov
   description: Setup Ubuntu/Debian repositories and APT package manager.
   license: Apache-2.0
-  role_name: essential
   min_ansible_version: "2.16"
-
-collections: []
-dependencies: []
+  namespace: dmitriysafronov
+  role_name: essential

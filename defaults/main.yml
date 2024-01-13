@@ -1,0 +1,7 @@
+---
+
+ubuntu_apt_repository_mirror: archive.ubuntu.com/ubuntu
+ubuntu_apt_repository_security: security.ubuntu.com/ubuntu
+
+debian_apt_repository_mirror: deb.debian.org/debian
+debian_apt_repository_security: security.debian.org/debian-security

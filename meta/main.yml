@@ -2,7 +2,7 @@ galaxy_info:
   author: Dmitriy Safronov
   description: Setup Ubuntu/Debian repositories and APT package manager.
   license: GPL
-  # role_name: essential
+  role_name: essential
   min_ansible_version: "2.16"
 
 collections: []

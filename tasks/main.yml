@@ -11,9 +11,9 @@
         - name: Template a file to /etc/apt/sources.list for Ubuntu {{ ansible_distribution_release }}
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} main restricted
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-updates main restricted
-              deb [arch=amd64] http://security.ubuntu.com/ubuntu {{ ansible_distribution_release }}-security main restricted
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }} main restricted
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }}-updates main restricted
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_security }} {{ ansible_distribution_release }}-security main restricted
             dest: /etc/apt/sources.list
             owner: root
             group: root
@@ -22,13 +22,13 @@
 
         - name: Template a file to /etc/apt/sources.list.d/universe.list for Ubuntu {{ ansible_distribution_release }}
           when:
-            - apt_repository_universe is defined
-            - apt_repository_universe
+            - ubuntu_apt_repository_universe is defined
+            - ubuntu_apt_repository_universe
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} universe
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-updates universe
-              deb [arch=amd64] http://security.ubuntu.com/ubuntu {{ ansible_distribution_release }}-security universe
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }} universe
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }}-updates universe
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_security }} {{ ansible_distribution_release }}-security universe
             dest: /etc/apt/sources.list.d/universe.list
             owner: root
             group: root
@@ -37,13 +37,13 @@
 
         - name: Template a file to /etc/apt/sources.list.d/multiverse.list for Ubuntu {{ ansible_distribution_release }}
           when:
-            - apt_repository_multiverse is defined
-            - apt_repository_multiverse
+            - ubuntu_apt_repository_multiverse is defined
+            - ubuntu_apt_repository_multiverse
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} multiverse
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-updates multiverse
-              deb [arch=amd64] http://security.ubuntu.com/ubuntu {{ ansible_distribution_release }}-security multiverse
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }} multiverse
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }}-updates multiverse
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_security }} {{ ansible_distribution_release }}-security multiverse
             dest: /etc/apt/sources.list.d/multiverse.list
             owner: root
             group: root
@@ -52,11 +52,11 @@
 
         - name: Template a file to /etc/apt/sources.list.d/backports.list for Ubuntu {{ ansible_distribution_release }}
           when:
-            - apt_repository_backports is defined
-            - apt_repository_backports
+            - ubuntu_apt_repository_backports is defined
+            - ubuntu_apt_repository_backports
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports main restricted
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }}-backports main restricted
             dest: /etc/apt/sources.list.d/backports.list
             owner: root
             group: root
@@ -65,13 +65,13 @@
 
         - name: Template a file to /etc/apt/sources.list.d/backports_universe.list for Ubuntu {{ ansible_distribution_release }}
           when:
-            - apt_repository_universe is defined
-            - apt_repository_universe
-            - apt_repository_backports is defined
-            - apt_repository_backports
+            - ubuntu_apt_repository_universe is defined
+            - ubuntu_apt_repository_universe
+            - ubuntu_apt_repository_backports is defined
+            - ubuntu_apt_repository_backports
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports universe
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }}-backports universe
             dest: /etc/apt/sources.list.d/backports_universe.list
             owner: root
             group: root
@@ -80,13 +80,13 @@
 
         - name: Template a file to /etc/apt/sources.list.d/backports_multiverse.list for Ubuntu {{ ansible_distribution_release }}
           when:
-            - apt_repository_multiverse is defined
-            - apt_repository_multiverse
-            - apt_repository_backports is defined
-            - apt_repository_backports
+            - ubuntu_apt_repository_multiverse is defined
+            - ubuntu_apt_repository_multiverse
+            - ubuntu_apt_repository_backports is defined
+            - ubuntu_apt_repository_backports
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://ru.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-backports multiverse
+              deb [arch=amd64] http://{{ ubuntu_apt_repository_mirror }} {{ ansible_distribution_release }}-backports multiverse
             dest: /etc/apt/sources.list.d/backports_multiverse.list
             owner: root
             group: root
@@ -100,9 +100,9 @@
         - name: Template a file to /etc/apt/sources.list for Debian {{ ansible_distribution_release }}
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }} main contrib
-              deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }}-updates main contrib
-              deb [arch=amd64] http://deb.debian.org/debian-security {{ ansible_distribution_release }}-security main contrib
+              deb [arch=amd64] http://{{ debian_apt_repository_mirror }} {{ ansible_distribution_release }} main contrib
+              deb [arch=amd64] http://{{ debian_apt_repository_mirror }} {{ ansible_distribution_release }}-updates main contrib
+              deb [arch=amd64] http://{{ debian_apt_repository_security }}-security {{ ansible_distribution_release }}-security main contrib
             dest: /etc/apt/sources.list
             owner: root
             group: root
@@ -111,13 +111,13 @@
 
         - name: Template a file to /etc/apt/sources.list.d/non-free.list for Debian {{ ansible_distribution_release }}
           when:
-            - apt_repository_non-free is defined
-            - apt_repository_non-free
+            - debian_apt_repository_non-free is defined
+            - debian_apt_repository_non-free
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }} non-free non-free-firmware
-              deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }}-updates non-free non-free-firmware
-              deb [arch=amd64] http://security.debian.org/debian-security {{ ansible_distribution_release }}-security non-free non-free-firmware
+              deb [arch=amd64] http://{{ debian_apt_repository_mirror }} {{ ansible_distribution_release }} non-free non-free-firmware
+              deb [arch=amd64] http://{{ debian_apt_repository_mirror }} {{ ansible_distribution_release }}-updates non-free non-free-firmware
+              deb [arch=amd64] http://{{ debian_apt_repository_security }} {{ ansible_distribution_release }}-security non-free non-free-firmware
             dest: /etc/apt/sources.list.d/non-free.list
             owner: root
             group: root
@@ -126,11 +126,11 @@
 
         - name: Template a file to /etc/apt/sources.list.d/backports.list for Debian {{ ansible_distribution_release }}
           when:
-            - apt_repository_backports is defined
-            - apt_repository_backports
+            - debian_apt_repository_backports is defined
+            - debian_apt_repository_backports
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }}-backports main contrib
+              deb [arch=amd64] http://{{ debian_apt_repository_mirror }} {{ ansible_distribution_release }}-backports main contrib
             dest: /etc/apt/sources.list.d/backports.list
             owner: root
             group: root
@@ -139,13 +139,13 @@
 
         - name: Template a file to /etc/apt/sources.list.d/backports_non-free.list for Debian {{ ansible_distribution_release }}
           when:
-            - apt_repository_backports is defined
-            - apt_repository_backports
-            - apt_repository_non-free is defined
-            - apt_repository_non-free
+            - debian_apt_repository_backports is defined
+            - debian_apt_repository_backports
+            - debian_repository_non-free is defined
+            - debian_repository_non-free
           ansible.builtin.copy:
             content: |
-              deb [arch=amd64] http://deb.debian.org/debian {{ ansible_distribution_release }}-backports non-free non-free-firmware
+              deb [arch=amd64] http://{{ debian_apt_repository_mirror }} {{ ansible_distribution_release }}-backports non-free non-free-firmware
             dest: /etc/apt/sources.list.d/backports_non-free.list
             owner: root
             group: root

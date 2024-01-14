@@ -46,3 +46,7 @@ jobs:
           body: |
             Upgrade from template
           draft: false
+          add-paths: |
+            .requirements/**
+            .github/workflows/lint.yaml
+            .github/workflows/update.yaml

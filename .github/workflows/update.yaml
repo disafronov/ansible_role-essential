@@ -35,7 +35,7 @@ jobs:
         if: ${{ github.repository != 'dmitriysafronov/ansible_role-template' }}
         run: |
           rsync -avP .update/.requirements/ .requirements/ || true
-          rsync -avP --exclude=** --include=lint.yaml --include=lint.yaml .update/.github/workflows/ .github/workflows/ || true
+          rsync -avP --exclude=** --include=lint.yaml --include=update.yaml .update/.github/workflows/ .github/workflows/ || true
           rm -rf .update/
 
       - name: Create pull request

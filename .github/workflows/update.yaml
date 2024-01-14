@@ -28,6 +28,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: dmitriysafronov/ansible_role-template
+          clean: false
 
       - uses: peter-evans/create-pull-request@v3
         if: ${{ github.repository != 'dmitriysafronov/ansible_role-template' }}

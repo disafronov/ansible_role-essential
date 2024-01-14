@@ -34,9 +34,9 @@ jobs:
       - name: Update files & clean sources
         if: ${{ github.repository != 'dmitriysafronov/ansible_role-template' }}
         run: |
-          cp -rvf .update/.requirements/                 .requirements/
-          cp -rvf .update/.github/workflows/lint.yaml   .github/workflows/lint.yaml
-          cp -rvf .update/.github/workflows/update.yaml .github/workflows/update.yaml
+          rsync -avP .update/.requirements/                 .requirements/ || true
+          rsync -avP .update/.github/workflows/lint.yaml   .github/workflows/lint.yaml || true
+          rsync -avP .update/.github/workflows/update.yaml .github/workflows/update.yaml || true
           rm -rvf .update/
 
       - uses: peter-evans/create-pull-request@v3

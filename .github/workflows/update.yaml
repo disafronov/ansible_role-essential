@@ -12,9 +12,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-env:
-  TEMPLATE_REPOSITORY: "dmitriysafronov/ansible_role-template"
-
 jobs:
 
   test:
@@ -23,17 +20,17 @@ jobs:
 
     steps:
       - name: Check out the codebase
-        if: ${{ github.repository != env.TEMPLATE_REPOSITORY }}
+        if: ${{ github.repository != 'dmitriysafronov/ansible_role-template' }}
         uses: actions/checkout@v3
 
       - name: Check out template repo
-        if: ${{ github.repository != env.TEMPLATE_REPOSITORY }}
+        if: ${{ github.repository != 'dmitriysafronov/ansible_role-template' }}
         uses: actions/checkout@v3
         with:
-          repository: env.TEMPLATE_REPOSITORY
+          repository: dmitriysafronov/ansible_role-template
 
       - uses: peter-evans/create-pull-request@v3
-        if: ${{ github.repository != env.TEMPLATE_REPOSITORY }}
+        if: ${{ github.repository != 'dmitriysafronov/ansible_role-template' }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: "update"

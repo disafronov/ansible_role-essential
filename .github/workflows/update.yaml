@@ -10,6 +10,7 @@ name: Update
 
 permissions:
   pull-requests: write
+  contents: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}

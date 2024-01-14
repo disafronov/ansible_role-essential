@@ -29,6 +29,15 @@ jobs:
         with:
           repository: dmitriysafronov/ansible_role-template
           clean: false
+          path: .update
+
+      - name: Update files & clean sources
+        if: ${{ github.repository != 'dmitriysafronov/ansible_role-template' }}
+        run: |
+          cp -rvf .update/.requirements/                 .requirements/
+          cp -rvf .update/.github/workflows/lint.yaml   .github/workflows/lint.yaml
+          cp -rvf .update/.github/workflows/update.yaml .github/workflows/update.yaml
+          rm -rvf .update/
 
       - uses: peter-evans/create-pull-request@v3
         if: ${{ github.repository != 'dmitriysafronov/ansible_role-template' }}

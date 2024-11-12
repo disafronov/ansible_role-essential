@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.1] - 2024-11-12
+
+### 🚜 Refactor
+
+- Update workflows & update.sh
+
 ## [2.1.0] - 2024-09-03
 
 ### 🚀 Features
